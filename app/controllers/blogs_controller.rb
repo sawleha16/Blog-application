@@ -3,42 +3,44 @@ class BlogsController < ApplicationController
      @blogs = Blog.all
   end
 
-    def show
-      @blog = Blog.find(params[:id])
-    end
+  def show
+    @blog = Blog.find(params[:id])
+  end
 
-    def new
-      @blog = Blog.new
-    end
+  def new
+    @blog = Blog.new
+  end
 
-    def create
-       @blog = Blog.new(title: "Hello Winter", body: "I m ready to have all the fun")
-       if @blog.save
-         redirect_to @blog
-       else
-         render :new, status: :unprocessable_entity
-       end
+  def create
+     @blog = Blog.new(blog_params)
+     if @blog.save
+       redirect_to @blog
+     else
+       render :new, status: :unprocessable_entity
      end
+   end
 
-    def edit
-      @blog= Blog.find(params[:id])
+  def edit
+    @blog= Blog.find(params[:id])
+  end
+
+  def update
+    @blog= Blog.find(params[:id])
+    if @blog.update(blog_params)
+      redirect_to @blog
+    else
+      render :edit, status: :unprocessable_entity
     end
+  end
 
-    def update
-      @blog= Blog.find(params[:id])
-      if @blog.update(blog_params)
-        redirect_to @blog
-      else
-        render :edit, status: :unprocessable_entity
-      end
-    end
+   def destroy
+     @blog=Blog.find(params[:id])
+     redirect_to root_path, status: :see_other
+   end
 
-     def destroy
-       @blog=Blog.find(params[:id])
-       redirect_to root_path, status: :see_other
-     end
-     end
-     private
+   private
+
     def blog_params
       params.require(:blog).permit(:title, :body)
     end
+end
