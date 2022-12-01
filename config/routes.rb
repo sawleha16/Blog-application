@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   get  "/home", to: "home#index"
   # get "/blogs", to: "blogs#index"
   # get "/blogs/:id" , to: "blogs#show"
-  resources :blogs
+  resources :blogs do
+  resources :comments
+  end
 end
