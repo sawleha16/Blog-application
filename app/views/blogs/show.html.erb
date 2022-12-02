@@ -12,8 +12,11 @@
 
 
 <h2>Comments</h2>
-<%= render @blog.comments %>
+<%@blog.comments.each do |comment| %>
+ <%= render "comments/comment" , comment: comment %>
+<%end%>
 
 
-<h2>Add a comment:</h2>
+
+<p>Add a comment:</p>
 <%= render 'comments/form' %>
