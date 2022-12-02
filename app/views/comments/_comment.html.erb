@@ -9,3 +9,7 @@
 </p>
 
 <p><%= link_to "Edit", edit_blog_comment_path(comment)%></p>
+<p><%= link_to "Destroy",blog_comment_path(@blog.id, comment), data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Are you sure?"
+                }%></p>

@@ -20,6 +20,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @blog = Blog.find(params[:blog_id])
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to root_path, status: :see_other
+  end
+
   private
   def comment_params
       params.require(:comment).permit(:commenter, :body)
